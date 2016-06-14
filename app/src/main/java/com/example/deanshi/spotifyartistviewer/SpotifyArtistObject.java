@@ -8,21 +8,23 @@ import java.util.List;
 
 public class SpotifyArtistObject {
 
+
     @SerializedName("artists")
     @Expose
     private Artists artists;
 
-
-    public class Artists {
-        @SerializedName("items")
-        @Expose
-        private List<Items> items = new ArrayList<Items>();
+    /**
+     * @return The artists
+     */
+    public Artists getArtists() {
+        return artists;
     }
 
-    public class Items {
-        @SerializedName("name")
-        @Expose
-        private String name;
+    /**
+     * @param artists The artists
+     */
+    public void setArtists(Artists artists) {
+        this.artists = artists;
     }
 
 }

@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface SpotifyManager {
-    @GET("search?q=artistName&type=artist")
-    Call<List<SpotifyArtistObject>> getArtists(@Query("artistName") String artistName);
+    @GET("https://api.spotify.com/v1/search?q=Andre&type=artist")
+    Call<SpotifyArtistObject> getArtists();
 }

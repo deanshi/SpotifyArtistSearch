@@ -35,16 +35,16 @@ public class SearchActivity extends AppCompatActivity {
 
         SpotifyRetrofitService spotifyRetrofit = new SpotifyRetrofitService();
 
-        SpotifyRetrofitService.spotifyManager.getArtists("Andre").enqueue(new Callback<List<SpotifyArtistObject>>() {
+        spotifyRetrofit.spotifyManager.getArtists().enqueue(new Callback<SpotifyArtistObject>() {
             @Override
-            public void onResponse(Call<List<SpotifyArtistObject>> call, Response<List<SpotifyArtistObject>> response) {
+            public void onResponse(Call<SpotifyArtistObject> call, Response<SpotifyArtistObject> response) {
                 if (response == null) Timber.d("No response from server");
 
-                Timber.d("Recieved response from server: %s", response.body());
+                Timber.d("Recieved response from server: %s", response.body().getArtists().getItems().get(0).getName());
             }
 
             @Override
-            public void onFailure(Call<List<SpotifyArtistObject>> call, Throwable t) {
+            public void onFailure(Call<SpotifyArtistObject> call, Throwable t) {
                 Timber.d(t, "Failed to get response from server");
             }
         });
