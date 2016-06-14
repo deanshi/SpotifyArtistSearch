@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SpotifyArtistViewer</string>
+    <string name="artist_search_hint">Search for Spotify Artist...</string>
+    <string name="base_url_string">https://api.spotify.com/v1/search</string>
+</resources>
