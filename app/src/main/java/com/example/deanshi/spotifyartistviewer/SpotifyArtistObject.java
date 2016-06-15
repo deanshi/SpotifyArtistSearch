@@ -8,7 +8,6 @@ import java.util.List;
 
 public class SpotifyArtistObject {
 
-
     @SerializedName("artists")
     @Expose
     private Artists artists;
