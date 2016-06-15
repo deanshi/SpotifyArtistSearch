@@ -47,9 +47,8 @@ public class SearchActivity extends AppCompatActivity {
         spotifyRetrofit.spotifyManager.getArtists("Franklin").enqueue(new Callback<SpotifyArtistObject>() {
             @Override
             public void onResponse(Call<SpotifyArtistObject> call, Response<SpotifyArtistObject> response) {
-                Timber.d("Recieved response from server: %s", response.body().getArtistsNamesList().toString());
-                ArrayAdapter<String> nameAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, response.body().getArtistsNamesList());
-                spotifyArtistList.setAdapter(nameAdapter);
+                Timber.d("Got response from server: %s", response.body().getArtistsNamesList().toString());
+                assignNameAdapter(response);
             }
 
             @Override
@@ -57,6 +56,11 @@ public class SearchActivity extends AppCompatActivity {
                 Timber.d(t, "Failed to get response from server");
             }
         });
+    }
+
+    public void assignNameAdapter(Response<SpotifyArtistObject> response) {
+        ArtistCustomAdapter nameAdapterCustom = new ArtistCustomAdapter(getBaseContext(), android.R.layout.simple_list_item_1, response.body().getArtists().getItems());
+        spotifyArtistList.setAdapter(nameAdapterCustom);
     }
 
 
