@@ -12,6 +12,7 @@ public class SpotifyArtistObject {
     @SerializedName("artists")
     @Expose
     private Artists artists;
+    private List<String> artistNames = new ArrayList<>();
 
     /**
      * @return The artists
@@ -25,6 +26,17 @@ public class SpotifyArtistObject {
      */
     public void setArtists(Artists artists) {
         this.artists = artists;
+    }
+
+    public void setArtistNamesList() {
+        for (int i = 0; i < artists.getItems().size(); i++) {
+            artistNames.add(artists.getItems().get(i).getName());
+        }
+    }
+
+    public List<String> getArtistsNamesList() {
+        setArtistNamesList();
+        return artistNames;
     }
 
 }
