@@ -3,10 +3,23 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:id="@+id/artist_picture"
+        />
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/artist_name"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:textSize="@dimen/default_artist_name"
         />
 
 </LinearLayout>

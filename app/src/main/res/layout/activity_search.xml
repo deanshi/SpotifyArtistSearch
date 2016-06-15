@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/artist_search_hint"
+        android:showAsAction="always"
         android:iconifiedByDefault="false"
         android:id="@+id/spotify_search_view">
     </SearchView>
@@ -22,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/spotify_search_view"
-        android:id="@+id/spotify_artist_list">
+        android:id="@android:id/list">
     </ListView>
 
 

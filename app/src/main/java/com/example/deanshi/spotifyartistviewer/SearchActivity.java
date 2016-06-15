@@ -1,8 +1,12 @@
 package com.example.deanshi.spotifyartistviewer;
 
+import android.app.ListActivity;
+import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -17,16 +21,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends ListActivity {
 
     @BindView(R.id.spotify_search_view)
     SearchView spotifySearchView;
 
-    @BindView(R.id.spotify_artist_list)
+    @BindView(android.R.id.list)
     ListView spotifyArtistList;
 
     String artistSearchString;
     List<String> artistNameList = new ArrayList<>();
+    List<String> artistImageList = new ArrayList<>();
     ArrayAdapter<String> artistNameAdapter;
 
     @Override
@@ -70,6 +75,7 @@ public class SearchActivity extends AppCompatActivity {
         artistNameAdapter.clear();
         if (response.body() != null) {
             artistNameList = response.body().getArtistsNamesList();
+            artistImageList = response.body().getArtistImageUrls();
             Timber.d("Received response from server: %s", artistNameList);
             Timber.d("Adapter: %s", spotifyArtistList.getAdapter().toString());
             artistNameAdapter.clear();
@@ -93,6 +99,15 @@ public class SearchActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Intent sendArtistName = new Intent(getBaseContext(), DisplayInformationActivity.class);
+        Timber.d("You picked %s", artistNameList.get(position));
+        Timber.d("URL for this artist image is %s", artistImageList.get(position));
+        sendArtistName.putExtra("ARTIST_NAME", artistNameList.get(position));
+        sendArtistName.putExtra("IMAGE_URL", artistImageList.get(position));
+        startActivity(sendArtistName);
     }
 
 
