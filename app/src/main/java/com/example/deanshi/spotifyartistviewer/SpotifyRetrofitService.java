@@ -1,7 +1,5 @@
 package com.example.deanshi.spotifyartistviewer;
 
-import android.content.res.Resources;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

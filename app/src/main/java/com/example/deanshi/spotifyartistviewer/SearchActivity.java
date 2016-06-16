@@ -2,8 +2,6 @@ package com.example.deanshi.spotifyartistviewer;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -46,14 +44,11 @@ public class SearchActivity extends ListActivity {
         setupSearchView();
     }
 
-
-    // Creates the adapter used to parse Strings into the ListView.
     public void setupAdapter() {
         artistNameAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, artistNameList);
         spotifyArtistList.setAdapter(artistNameAdapter);
     }
 
-    //Uses the SpotifyRetrofit class to get Artist names and update the adapter with the response.
     public void getArtistNames(String nameOfArtist) {
 
         SpotifyRetrofitService spotifyRetrofit = new SpotifyRetrofitService();
@@ -70,7 +65,6 @@ public class SearchActivity extends ListActivity {
         });
     }
 
-    //Updates the contents of the adapter.
     public void updateAdapter(Response<SpotifyArtistObject> response) {
         artistNameAdapter.clear();
         if (response.body() != null) {
@@ -105,9 +99,11 @@ public class SearchActivity extends ListActivity {
     }
 
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Intent sendArtistName = new Intent(getBaseContext(), DisplayInformationActivity.class);
+
         Timber.d("You picked %s", artistNameList.get(position));
         Timber.d("URL for this artist image is %s", artistImageList.get(position));
+
+        Intent sendArtistName = new Intent(getBaseContext(), DisplayInformationActivity.class);
         sendArtistName.putExtra("ARTIST_NAME", artistNameList.get(position));
         sendArtistName.putExtra("IMAGE_URL", artistImageList.get(position));
         startActivity(sendArtistName);
