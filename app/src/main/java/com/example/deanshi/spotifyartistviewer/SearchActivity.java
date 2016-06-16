@@ -57,7 +57,7 @@ public class SearchActivity extends ListActivity {
     public void getArtistNames(String nameOfArtist) {
 
         SpotifyRetrofitService spotifyRetrofit = new SpotifyRetrofitService();
-        SpotifyRetrofitService.spotifyManager.getArtists(nameOfArtist).enqueue(new Callback<SpotifyArtistObject>() {
+        spotifyRetrofit.spotifyManager.getArtists(nameOfArtist).enqueue(new Callback<SpotifyArtistObject>() {
             @Override
             public void onResponse(Call<SpotifyArtistObject> call, Response<SpotifyArtistObject> response) {
                 updateAdapter(response);
@@ -74,10 +74,13 @@ public class SearchActivity extends ListActivity {
     public void updateAdapter(Response<SpotifyArtistObject> response) {
         artistNameAdapter.clear();
         if (response.body() != null) {
+            response.body().populateArtistInfo();
             artistNameList = response.body().getArtistsNamesList();
             artistImageList = response.body().getArtistImageUrls();
+
             Timber.d("Received response from server: %s", artistNameList);
             Timber.d("Adapter: %s", spotifyArtistList.getAdapter().toString());
+
             artistNameAdapter.clear();
             artistNameAdapter.addAll(artistNameList);
             artistNameAdapter.notifyDataSetChanged();
@@ -109,6 +112,4 @@ public class SearchActivity extends ListActivity {
         sendArtistName.putExtra("IMAGE_URL", artistImageList.get(position));
         startActivity(sendArtistName);
     }
-
-
 }

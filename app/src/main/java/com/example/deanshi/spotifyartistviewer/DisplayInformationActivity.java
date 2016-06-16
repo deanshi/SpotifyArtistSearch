@@ -14,13 +14,11 @@ import timber.log.Timber;
 
 public class DisplayInformationActivity extends AppCompatActivity {
 
-
     @BindView(R.id.artist_name)
     TextView artistClickedName;
 
     @BindView(R.id.artist_picture)
     ImageView artistClickedPicture;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +33,6 @@ public class DisplayInformationActivity extends AppCompatActivity {
         String getArtistName = getIntent().getStringExtra("ARTIST_NAME");
         Timber.d("getArtistName %s", getArtistName);
         artistClickedName.setText(getArtistName);
-
-
     }
 
     public void setArtistClickedPicture() {
@@ -47,15 +43,5 @@ public class DisplayInformationActivity extends AppCompatActivity {
                     .load(getImageUrl)
                     .into(artistClickedPicture);
         }
-
-
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        this.finish();
-    }
-
-
 }

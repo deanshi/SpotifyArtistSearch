@@ -9,9 +9,8 @@ public class SpotifyRetrofitService {
 
     public static final String BASE_URL = "https://api.spotify.com/v1/search/";
 
-
-    public static Retrofit spotifyRetrofit;
-    public static SpotifyManager spotifyManager;
+    public Retrofit spotifyRetrofit;
+    public SpotifyManager spotifyManager;
 
     public SpotifyRetrofitService() {
         spotifyRetrofit = new Retrofit.Builder()
@@ -20,6 +19,4 @@ public class SpotifyRetrofitService {
                 .build();
         spotifyManager = spotifyRetrofit.create(SpotifyManager.class);
     }
-
-
 }

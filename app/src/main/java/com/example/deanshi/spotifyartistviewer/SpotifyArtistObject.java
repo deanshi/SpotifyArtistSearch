@@ -30,19 +30,22 @@ public class SpotifyArtistObject {
     }
 
     public List<String> getArtistsNamesList() {
-        setArtistInfoLists();
         return artistNames;
-    }
-
-    public void setArtistInfoLists() {
-        for (int i = 0; i < artists.getItems().size(); i++) {
-            artistNames.add(artists.getItems().get(i).getName());
-            artistImageUrls.add(getImageUrl(artists, i));
-        }
     }
 
     public List<String> getArtistImageUrls() {
         return artistImageUrls;
+    }
+
+    public void populateArtistInfo() {
+        for (int i = 0; i < artists.getItems().size(); i++) {
+            artistNames.add(getArtistNames(artists, i));
+            artistImageUrls.add(getImageUrl(artists, i));
+        }
+    }
+
+    public String getArtistNames(Artists artist, int position) {
+        return artist.getItems().get(position).getName();
     }
 
     public String getImageUrl(Artists artist, int position) {
@@ -51,8 +54,7 @@ public class SpotifyArtistObject {
             return artist.getItems().get(position).getImages().get(1).getUrl();
         } catch (IndexOutOfBoundsException noImage)  {
             Timber.d("Artist has no Image");
-            return "No Image";
+            return "No Image"; //use to display No Image Bitmap
         }
     }
-
 }
